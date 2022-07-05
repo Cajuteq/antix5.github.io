@@ -6,6 +6,15 @@
 
         document.addEventListener("DOMContentLoaded", checkcookies);
 
+        function clear(){
+            modulelist.forEach(element => {
+                delete element
+            });
+            let renderedhtml = rendermodules();
+            $("#modulebody").html(renderedhtml);
+            document.cookie = "";
+        }
+
         
         function checkcookies(){
             console.log(`Current cookies: ${document.cookie}`);
@@ -19,8 +28,6 @@
             let modulelistcookie = cookies.find(element => element.includes("modulelist"));
             let modulelistcookievalue = modulelistcookie.split("=")[1];
             // if the value in not null, we parse it , else we return an empty array
-
-            console.log(modulelistcookievalue);
 
             if(modulelistcookievalue != ""){
                 modulelisttmp = JSON.parse(modulelistcookievalue);

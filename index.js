@@ -3,6 +3,45 @@
         let maxid = 0;
         const idlist=[]
         // 1092 problem with split
+
+        
+        function checkcookies(){
+            console.log(`Current cookies: ${document.cookie}`);
+            if(document.cookie!=undefined && document.cookie!=""){
+
+                console.log("cookies found");
+                console.log(document.cookie);
+
+            let cookies = document.cookie.split(";");
+            // We get the value from the modulelist cookie
+            let modulelistcookie = cookies.find(element => element.includes("modulelist"));
+            let modulelistcookievalue = modulelistcookie.split("=")[1];
+            // if the value in not null, we parse it , else we return an empty array
+
+            console.log(modulelistcookievalue);
+
+            if(modulelistcookievalue != ""){
+                modulelisttmp = JSON.parse(modulelistcookievalue);
+                for (let i = 0; i < modulelisttmp.length; i++) {
+                    modulelist.push(modulelisttmp[i]);
+                }
+            }
+
+            let renderedhtml = rendermodules();
+
+            $("#modulebody").html(renderedhtml);
+
+            }else{
+
+                addpage();
+
+
+            }
+
+            
+
+
+        }
         
 
         function addpage(){
@@ -134,7 +173,7 @@
                     };
                     break;
 
-                case "prise_de_photo":
+                case "prise_photo":
 
                     return {
                         "id" : id,
@@ -1446,6 +1485,12 @@
                 
             });
 
+            // We save the modulelist in the cookies
+            if(savemode){
+                console.log("Cookies saved");
+                document.cookie = "modulelist="+JSON.stringify(modulelist);
+            }
+
             return modulehtml;
 
 
@@ -1517,7 +1562,7 @@
          }
 
 
-        addpage();
+        
 
         // When someone chose a file (file-selector), it's loaded and rendered
         $("#file-selector").on("change", function(e) {

@@ -7,6 +7,7 @@
         document.addEventListener("DOMContentLoaded", checkcookies);
 
         function clearpage(){
+            console.log("clearing page");
             modulelist.forEach(element => {
                 delete element
             });

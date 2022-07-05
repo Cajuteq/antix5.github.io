@@ -4,6 +4,8 @@
         const idlist=[]
         // 1092 problem with split
 
+        document.addEventListener("DOMContentLoaded", checkcookies);
+
         
         function checkcookies(){
             console.log(`Current cookies: ${document.cookie}`);

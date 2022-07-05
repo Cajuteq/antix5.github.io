@@ -11,6 +11,7 @@
             modulelist.forEach(element => {
                 delete element
             });
+            console.log(modulelist);
             let renderedhtml = rendermodules(savemode=false);
             $("#modulebody").html(renderedhtml);
             document.cookie = "";

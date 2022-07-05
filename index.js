@@ -6,11 +6,11 @@
 
         document.addEventListener("DOMContentLoaded", checkcookies);
 
-        function clear(){
+        function clearpage(){
             modulelist.forEach(element => {
                 delete element
             });
-            let renderedhtml = rendermodules();
+            let renderedhtml = rendermodules(savemode=false);
             $("#modulebody").html(renderedhtml);
             document.cookie = "";
         }

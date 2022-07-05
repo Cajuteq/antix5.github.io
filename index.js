@@ -29,7 +29,7 @@
                 }
             }
 
-            let renderedhtml = rendermodules();
+            let renderedhtml = rendermodules(savemode=false);
 
             $("#modulebody").html(renderedhtml);
 

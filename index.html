@@ -95,6 +95,18 @@
         <input type="file" id="file-selector" accept=".json">
         <input type="button" class="newmoduleandpage" onclick="clearpage()" value="Clear page">
 
+        <script>
+                        // When someone chose a file (file-selector), it's loaded and rendered
+            $("#file-selector").on("change", function(e) {
+
+                console.log("file changed");
+                loadjson();
+
+
+                }
+                );
+        </script>
+
     </form>
 
     <div id="modulebody">

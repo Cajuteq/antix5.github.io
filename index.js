@@ -1573,14 +1573,7 @@
 
         
 
-        // When someone chose a file (file-selector), it's loaded and rendered
-        $("#file-selector").on("change", function(e) {
 
-            loadjson();
-            console.log("file changed");
-           
-        }
-        );
 
         function addModuleOnTheFly(idmodule){
 
@@ -1647,6 +1640,8 @@
 
         // Change the attribute of the page for the attribute in the json file loaded by the user (with file-selector)
         function loadjson(){
+
+                console.log("starting to load json");
                 
                 let file = $("#file-selector")[0].files[0];
                 let reader = new FileReader();

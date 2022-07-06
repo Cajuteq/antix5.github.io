@@ -2,7 +2,7 @@
         const modulelist = [];
         let maxid = 0;
         const idlist=[]
-        // 1092 problem with split
+       
 
         document.addEventListener("DOMContentLoaded", checkcookies);
 

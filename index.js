@@ -8,9 +8,7 @@
 
         function clearpage(){
             console.log("clearing page");
-            modulelist.forEach(element => {
-                delete element
-            });
+            modulelist.splice(0, modulelist.length);
             console.log(modulelist);
             let renderedhtml = rendermodules(savemode=false);
             $("#modulebody").html(renderedhtml);

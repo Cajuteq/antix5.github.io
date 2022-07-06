@@ -1554,7 +1554,7 @@
 
             jsonpage.pages = pagelist;
                
-            let jsonstring = JSON.stringify(jsonpage);
+            let jsonstring = JSON.stringify(jsonpage, null, 4);
 
             let blob = new Blob([jsonstring], {type: "application/json"});
             let url = URL.createObjectURL(blob);

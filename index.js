@@ -915,6 +915,16 @@
                         element.image_arriere_plan = "https://api.planet.ad1838.ovh/media/thumbnail/blank.webp";
                     }
 
+                    if(element.image_arriere_plan == ""){
+                        try{
+                            // We delete the image_arriere_plan if it's empty
+                            delete element.image_arriere_plan;
+
+                        }catch(e){
+                            element.image_arriere_plan = "https://api.planet.ad1838.ovh/media/thumbnail/blank.webp";
+                        }
+                    }
+
                     if(element.reponse_type == undefined){
                         element.reponse_type = "";
                     }
@@ -1213,9 +1223,21 @@
                         if(element.question == undefined){
                             element.question = "";
                         }
+
                         if(element.image_arriere_plan == undefined){
                             element.image_arriere_plan = "";
                         }
+
+                        if(element.image_arriere_plan == ""){
+                            try{
+                                // We delete the image_arriere_plan if it's empty
+                                delete element.image_arriere_plan;
+
+                            }catch(e){
+                                element.image_arriere_plan = "https://api.planet.ad1838.ovh/media/thumbnail/blank.webp";
+                            }
+                        }
+
                         if(element.echelle == undefined){
                             element.echelle = 1;
                         }
@@ -1267,6 +1289,17 @@
                         if(element.image_arriere_plan == undefined){
                             element.image_arriere_plan = "";
                         }
+
+                        if(element.image_arriere_plan == ""){
+                            try{
+                                // We delete the image_arriere_plan if it's empty
+                                delete element.image_arriere_plan;
+
+                            }catch(e){
+                                element.image_arriere_plan = "https://api.planet.ad1838.ovh/media/thumbnail/blank.webp";
+                            }
+                        }
+
                         if(element.echelle == undefined){
                             element.echelle = 1;
                         }

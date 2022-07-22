@@ -1123,8 +1123,15 @@
 
                             if(savemode){
 
-                            let echelle = $("."+element.id+"echelle");
+                            element.echelle = $("."+element.id+"echelle").val();
+
+
+                            try{
                             element.liste_url = urls.val().split(";");
+                            }catch(e){
+                                element.liste_url = [];
+                            }
+
 
                             }
 

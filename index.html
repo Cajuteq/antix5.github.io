@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td>Version</td>
-            <td><input type="text" id="version" placeholder="0.2.5"></td>
+            <td><input type="text" id="version" placeholder="0.3.0"></td>
         </tr>
         <tr>
             <td>Image</td>
@@ -62,6 +62,7 @@
 
     <form>
         <select name="module" id="modulechoice">
+            <option value="titre">titre</option>
             <option value="texte">texte</option>
             <option value="image">image</option>
             <option value="video">video</option>
@@ -70,6 +71,9 @@
             <option value="texte_a_trous">texte_a_trous</option>
             <option value="QCU">QCU</option>
             <option value="QCM">QCM</option>
+            <option value="QCM_images">QCM_images</option> 
+            <option value="infobox">infobox</option> 
+            <option value="carrousel">carroussel</option> 
             <option value="colonnes_a_remplir">colonnes_a_remplir</option>
             <option value="dessin">dessin</option>
             <option value="prise_photo">prise_photo</option>
@@ -84,9 +88,8 @@
             <option value="question_deplacement">question_deplacement</option>
             <option value="question_gyroscope">question_gyroscope</option>
             <option value="question_accelerometre">question_accelerometre</option>
-            <option value="glisser_deposer_cible">glisser_deposer_cible</option>
-            <option value="glisser_deposer_zone">glisser_deposer_zone</option>
-            <option value="titre">titre</option>
+            <option value="glisser_deposer_cible">glisser_deposer_cible</option> 
+            <option value="glisser_deposer_zone">glisser_deposer_zone</option> 
             <option value="pause">pause</option>
         </select>
         <input type="button" class="newmoduleandpage" onclick="addmodule()" value="Add module">

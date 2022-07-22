@@ -75,6 +75,14 @@
         function moduleswitch(module , id){
             switch (module) {
 
+                case "titre":
+                    return {
+                        "id" : id,
+                        "type_module": "titre",
+                        "contenu": ""
+
+                    };
+
                 case "texte":
                     return {
                         "id" : id,
@@ -160,6 +168,39 @@
 
                     break;
 
+                case "QCM_images":
+                    return {
+                        "id" : id,
+                        "type_module": "QCM_images",
+                        "question": "",
+                        "propositions": [],
+                        "reponse_type": []
+                       }
+
+                    break;
+
+                case "infobox":
+                    return {
+                        "id" : id,
+                        "type_module": "infobox",
+                        "contenu": ""
+                    }
+
+                    break;
+
+                case "carrousel":
+                    return {
+                        "id" : id,
+                        "type_module": "carrousel",
+                        "liste_url": [],
+                        "echelle": 0.6
+                    }
+
+                    break; 
+                           
+                           
+
+
                 case "colonnes_a_remplir":
                     return {
                         "id" : id,
@@ -186,8 +227,10 @@
 
                     return {
                         "id" : id,
-                        "type_module": "prise_de_photo",
-                        "contenu": ""
+                        "type_module": "prise_photo",
+                        "contenu": "",
+                        "nombre_max_images": 5
+
                     };
                     break;
 
@@ -288,10 +331,59 @@
                     return {
                         "id" : id,
                         "type_module": "glisser_deposer_cible",
-                        "question": "",
-                        "reponse_type": ""
-                    };
+                        "question": "place les éléments dans les cases",
+                        "image_arriere_plan": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl2O7X6TvRBcplG5XIFq1F8VuUeBUZQ6q-Xw&usqp=CAU",
+                        "echelle": 0.6,
+                        "cibles": [ "(30,20)", "(60, 80)" ],
+                        "objets": [
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(100,0)",
+                        "echelle": 0.6,
+                        }
+                        ]
+                       };
                     break;
+
+                case "glisser_deposer_zone":
+                    return {
+                        "id" : id,
+                        "type_module": "glisser_deposer_zone",
+                        "question": "place les éléments dans les zones",
+                        "image_arriere_plan": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl2O7X6TvRBcplG5XIFq1F8VuUeBUZQ6q-Xw&usqp=CAU",
+                        "echelle": 0.6,
+                        "zones": [ "(90%,100%)", "(10%, 100%)" ],
+                        "objets": [
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(100,0)",
+                        "echelle": 0.6
+                        }
+                        ]
+                    };
+
+
+
 
                 case "newpage":
                     return {
@@ -409,6 +501,128 @@
 
                     
                         break;
+
+                    case "infobox":
+
+                        if(savemode){
+
+                        // We firstly save the value of the textarea already displayed in the module
+                        let textarea = $("."+element.id+"zone");
+                        element.contenu = textarea.val();
+
+                        }
+
+                        if(element.contenu == undefined){
+                            element.contenu = "";
+                        }
+
+                        modulehtml += `<div class="module">
+                                        <div class="module_header">
+                                            <h3>Infobox</h3>
+                                            <button class="btn btn-danger btn-sm delete_module" onclick="removeblock('${element.id}')"></button>
+                                        </div>
+
+                                        <div class="module_content">
+
+                                            <div class="form-group">    
+                                                <textarea class="form-control ${element.id}zone" id="text" rows="3">${element.contenu.replace(/\"/g,"\'\'")}</textarea>
+
+                                                <div class="selectionbar">
+
+                                                    <button class="formatingbutton" onclick="addtext('${element.id}','** bold **')">𝙗</button>
+
+                                                    <button class="formatingbutton nextbut" onclick="addtext('${element.id}','_ italic _')">𝘪</button>
+
+                                                    <button class="formatingbutton nextbut" onclick="addtext('${element.id}','•')">•</button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="reposition">
+
+                                        <table><tr>
+                                        <td class="arrow ${element.id}up"><button class="up" onclick="upswitch(${element.id})">ᐱ</button></td>
+                                        <td class="arrow ${element.id}down"><button class="down" onclick="downswitch(${element.id})">ᐯ</button></td>
+                                        <td class="arrow ${element.id}add"><button onclick="addModuleOnTheFly(${element.id})">+</button></td>
+                                        <tr></table>
+
+                                    </div>
+
+                                    </div>`;
+
+                        break;
+
+                    case "titre":
+
+                        if(savemode){
+
+                        // We firstly save the value of the textarea already displayed in the module
+                        let textarea = $("."+element.id+"zone");
+                        element.contenu = textarea.val();
+
+                        }
+
+                        if(element.contenu == undefined){
+                            element.contenu = "";
+                        }
+
+                        modulehtml += `<div class="module">
+                                        <div class="module_header">
+                                            <h3>Titre</h3>
+                                            <button class="btn btn-danger btn-sm delete_module" onclick="removeblock('${element.id}')"></button>
+
+                                        </div>
+
+
+                                        <div class="module_content">
+
+                                            <div class="form-group">
+
+                                                <textarea class="form-control ${element.id}zone" id="text" rows="1">${element.contenu.replace(/\"/g,"\'\'")}</textarea>
+
+                                                <div class="selectionbar">
+
+                                                    <button class="formatingbutton" onclick="addtext('${element.id}','** bold **')">𝙗</button>
+
+                                                    <button class="formatingbutton nextbut" onclick="addtext('${element.id}','_ italic _')">𝘪</button>
+
+                                                    <button class="formatingbutton nextbut" onclick="addtext('${element.id}','•')">•</button>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="reposition">
+
+                                        <table><tr>
+                                        <td class="arrow ${element.id}up"><button class="up" onclick="upswitch(${element.id})">ᐱ</button></td>
+                                        <td class="arrow ${element.id}down"><button class="down" onclick="downswitch(${element.id})">ᐯ</button></td>
+                                        <td class="arrow ${element.id}add"><button onclick="addModuleOnTheFly(${element.id})">+</button></td>
+
+                                        <tr></table>
+
+
+                                    </div>
+
+                                    </div>`;
+
+
+                        break;
+
+
+                        
+
+
+
+
+
+                        
+
 
                     case "image":
 
@@ -831,6 +1045,145 @@
                         
                         break;
 
+                        case "QCM_images":
+
+                            if(savemode){
+    
+                            let questioncm = $("."+element.id+"question");
+                            let propositionscm = $("."+element.id+"propositions");
+                            let reponsetypecm = $("."+element.id+"reponse_type");
+                            element.question = questioncm.val();
+                            try{
+                                element.propositions = propositionscm.val().split(";");
+                            }catch(e){
+                                    element.propositions = [];
+                            }
+                            try{
+                            element.reponse_type = reponsetypecm.val().split(";");
+                            }catch(e){
+                                console.log("Warning: spliting undefined reponse_type QCM");
+                                element.reponse_type = [];
+                            }
+                            }
+                        
+    
+                        if(element.reponse_type == undefined){
+                            element.reponse_type = [];
+                        }
+    
+                        if(element.propositions == undefined){
+                            element.propositions = [];
+                        }
+    
+                        
+    
+                        if(element.question == undefined){
+                            element.question = "";
+                        }
+    
+                
+    
+    
+                    
+    
+                            modulehtml += `<div class="module QCM Images">
+    
+                                <div class="module_header">
+                                                <h3>QCM</h3>
+                                                <button class="btn btn-danger btn-sm delete_module" onclick="removeblock('${element.id}')"></button>
+                                </div>
+                                <div class="module_content">
+    
+                                Question
+                                <input type="text" class="form-control ${element.id}question" id="question" value="${element.question.replace(/\"/g,"\'\'")}" placeholder="Question">
+                                Propositions (";" comme séparateur)
+                                <input class="form-control ${element.id}propositions" id="proposition" value="${element.propositions.join(";").replace(/\"/g,"\'\'")}" placeholder="urls images (separé par ;)"></textarea>
+                                Réponse Type (";" comme séparateur)
+                                <input type="text" class="form-control ${element.id}reponse_type" id="reponse_type" value="${element.reponse_type.join(";").replace(/\"/g,"\'\'")}" placeholder="Réponse type (urls ;)">
+                                </div>
+    
+    
+                                <div class="reposition">
+    
+                                <table><tr>
+                                <td class="arrow ${element.id}up"><button class="up" onclick="upswitch(${element.id})">ᐱ</button></td>
+                                <td class="arrow ${element.id}down"><button class="down" onclick="downswitch(${element.id})">ᐯ</button></td>
+                                <td class="arrow ${element.id}add"><button onclick="addModuleOnTheFly(${element.id})">+</button></td>
+                                <tr></table>
+                    
+                            </div>
+    
+                            </div>`;
+    
+                            
+                            break;
+
+                        case "carrousel":
+
+
+                            if(savemode){
+
+                            let echelle = $("."+element.id+"echelle");
+                            element.liste_url = urls.val().split(";");
+
+                            }
+
+                            if(element.liste_url == undefined){
+
+                                element.liste_url = [];
+
+                            }
+
+                            if(element.echelle == undefined){
+
+                                element.echelle = 0.6;
+
+                            }
+
+                            modulehtml += `<div class="module carrousel">
+
+
+                                <div class="module_header">
+
+                                                <h3>Carrousel</h3>
+
+                                                <button class="btn btn-danger btn-sm delete_module" onclick="removeblock('${element.id}')"></button>
+
+                                </div>
+
+                                <div class="module_content">
+
+                                Liste des images (urls séparées par ;)
+
+                                <input class="form-control ${element.id}urls" id="urls" value="${element.liste_url.join(";").replace(/\"/g,"\'\'")}" placeholder="urls images (separées par ;)">
+
+                                Echelle (0.6 par défaut)
+
+                                <input type="text" class="form-control ${element.id}echelle" id="echelle" value="${element.echelle}" placeholder="Echelle">
+
+                                </div>
+
+                                <div class="reposition">
+
+                                <table><tr>
+
+                                <td class="arrow ${element.id}up"><button class="up" onclick="upswitch(${element.id})">ᐱ</button></td>
+
+                                <td class="arrow ${element.id}down"><button class="down" onclick="downswitch(${element.id})">ᐯ</button></td>
+
+                                <td class="arrow ${element.id}add"><button onclick="addModuleOnTheFly(${element.id})">+</button></td>
+
+                                <tr></table>
+
+                            </div>
+
+
+                            </div>`;
+
+                
+                        break;
+
+
                     case "colonnes_a_remplir":
                     if(savemode){
                         let questioncol = $("."+element.id+"question");
@@ -966,11 +1319,27 @@
 
                       
                         break;
+
+                    /*
+                                    case "prise_photo":
+
+                    return {
+                        "id" : id,
+                        "type_module": "prise_de_photo",
+                        "contenu": "",
+                        "nombre_max_images": 5
+
+                    };
+                    break;
+                    */
                     
                     case "prise_photo":
                     if(savemode){
                         let questionphoto = $("."+element.id+"zone");
                         element.contenu = questionphoto.val();
+                        element.nombre_max_images = $("."+element.id+"nombre_max_images").val();
+
+
                     }
 
                     if(element.contenu == undefined){
@@ -978,7 +1347,7 @@
 
                     }
 
-                        modulehtml += `<div class="module prise_de_photo">
+                        modulehtml += `<div class="module prise_photo">
 
                             <div class="module_header">
                                             <h3>Prise de photo</h3>
@@ -988,6 +1357,9 @@
                             <div class="module_content">
                             Texte de la prise de photo
                             <input type="text" class="form-control ${element.id}zone" id="prisephoto" value="${element.contenu.replace(/\"/g,"\'\'")}" placeholder="Remarque">
+
+                            <input type="number" class="${element.id}nombre_max_images" value="${element.nombre_max_images}" name="quantity" min="1">
+                            
                       
                             </div>
 
@@ -1207,6 +1579,37 @@
                        
                         break;
 
+
+                    /*
+
+                    {
+                        "id" : id,
+                        "type_module": "glisser_deposer_cible",
+                        "question": "place les éléments dans les cases",
+                        "image_arriere_plan": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl2O7X6TvRBcplG5XIFq1F8VuUeBUZQ6q-Xw&usqp=CAU",
+                        "echelle": 0.6,
+                        "cibles": [ "(30,20)", "(60, 80)" ],
+                        "objets": [
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(0,0)",
+                        "echelle": 0.6
+                        },
+                        {
+                        "image": "exemple.png",
+                        "position_initiale": "(100,0)",
+                        "echelle": 0.6,
+                        }
+                        ]
+                       }
+
+                    */
+
                     case "glisser_deposer_cible":
                         // question, image_arriere_plan, echelle, objets (liste)
                         if(savemode){
@@ -1217,7 +1620,13 @@
                             element.question = questionglisserdeposercible.val();
                             element.image_arriere_plan = imagearriereplanglisserdeposercible.val();
                             element.echelle = parseFloat(echelleglisserdeposercible.val());
-                            element.objets = objetsglisserdeposercible.val();
+                            // We convert the json into a dictionary
+                            try{
+                            element.objets = JSON.parse(objetsglisserdeposercible.val());
+                            }catch(e){
+                                element.objets = [];
+                            }
+                           
                         }
 
                         if(element.question == undefined){
@@ -1254,7 +1663,31 @@
                             Echelle
                             <input type="text" class="form-control ${element.id}echelle" id="echelle" value="${element.echelle}" placeholder="Echelle">
                             Objets (liste)
-                            <textarea type="text" class="form-control ${element.id}objets" id="objets" value="${element.objets}" placeholder="Objets"></textarea>
+                            <textarea type="text" class="form-control ${element.id}objets" id="objets" value="${element.objets}" placeholder="Objets">
+
+                            [
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(0,0)",
+                                "echelle": 0.6
+                                },
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(0,0)",
+                                "echelle": 0.6
+                                },
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(100,0)",
+                                "echelle": 0.6,
+                                }
+                            ]
+                            
+                            
+                            
+                            
+                            
+                            </textarea>
                             </div>
 
                             <div class="reposition">
@@ -1280,7 +1713,11 @@
                             element.question = questionglisserdeposerzone.val();
                             element.image_arriere_plan = imagearriereplanglisserdeposerzone.val();
                             element.echelle = parseFloat(echelleglisserdeposerzone.val());
-                            element.objets = objetsglisserdeposerzone.val();
+                            try{
+                                element.objets = JSON.parse(objetsglisserdeposercible.val());
+                                }catch(e){
+                                    element.objets = [];
+                            }
                         }
 
                         if(element.question == undefined){
@@ -1317,7 +1754,27 @@
                             Echelle
                             <input type="text" class="form-control ${element.id}echelle" id="echelle" value="${element.echelle}" placeholder="Echelle">
                             Objets (liste)
-                            <textarea type="text" class="form-control ${element.id}objets" id="objets" value="${element.objets}" placeholder="Objets"></textarea>
+                            <textarea type="text" class="form-control ${element.id}objets" id="objets" value="${element.objets}" placeholder="Objets">
+                            
+                            [
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(0,0)",
+                                "echelle": 0.6
+                                },
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(0,0)",
+                                "echelle": 0.6
+                                },
+                                {
+                                "image": "exemple.png",
+                                "position_initiale": "(100,0)",
+                                "echelle": 0.6
+                                }
+                            ]
+
+                            </textarea>
                             </div>
 
                             <div class="reposition">

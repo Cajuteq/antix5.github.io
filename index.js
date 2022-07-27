@@ -29,16 +29,27 @@
             let modulelistcookievalue = modulelistcookie.split("=")[1];
             // if the value in not null, we parse it , else we return an empty array
 
+            let idlocalmax = 0;
+
             if(modulelistcookievalue != ""){
                 modulelisttmp = JSON.parse(modulelistcookievalue);
                 for (let i = 0; i < modulelisttmp.length; i++) {
                     modulelist.push(modulelisttmp[i]);
+
+                    if(modulelisttmp[i].id > idlocalmax){
+                        idlocalmax = modulelisttmp[i].id;
+                    }
                 }
             }
 
+            maxid = idlocalmax;
+
+        
             let renderedhtml = rendermodules(savemode=false);
 
             $("#modulebody").html(renderedhtml);
+
+
 
             }else{
 

@@ -1313,7 +1313,7 @@
                             Question
                             <input type="text" class="form-control ${element.id}question" id="question" value="${element.question.replace(/\"/g,"\'\'")}" placeholder="Question">
                             Url image de fond
-                            <input type="text" class="form-control ${element.id}url" id="url" value="${element.url}" placeholder="Url image de fond">
+                            <input type="text" class="form-control ${element.id}url" id="url" value="${element.image_arriere_plan}" placeholder="Url image de fond">
                             echelle de la figure (en %)
                             <input type="number" class="${element.id}echelle" value="${element.echelle*100}" name="quantity" min="1">
                             réponse type (1 seule réponse) (url)

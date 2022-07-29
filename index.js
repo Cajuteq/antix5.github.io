@@ -1355,7 +1355,7 @@
                     if(savemode){
                         let questionphoto = $("."+element.id+"zone");
                         element.contenu = questionphoto.val();
-                        element.nombre_max_images = $("."+element.id+"nombre_max_images").val();
+                        element.nombre_max_images = parseInt($("."+element.id+"nombre_max_images").val());
 
 
                     }
